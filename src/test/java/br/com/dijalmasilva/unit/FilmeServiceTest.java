@@ -25,7 +25,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-public class TestFilmeUnit {
+public class FilmeServiceTest {
 
     @Autowired
     private FilmeService service;

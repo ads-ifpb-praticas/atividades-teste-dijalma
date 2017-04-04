@@ -23,7 +23,6 @@ public class FilmeValidation {
 
         for (int i = 0; i < titulo.length(); i++) {
             String letter = titulo.substring(i, i+1);
-            System.out.println(letter);
             if (especial.contains(letter)) {
                 throw new FilmeException("Título do filme não pode conter caracteres especiais, exceto #,!,?");
             }
