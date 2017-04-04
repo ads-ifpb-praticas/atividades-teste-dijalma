@@ -1,0 +1,140 @@
+<!--
+ * Created by <a href="http://dijalmasilva.github.io/" target="_blank">Dijalma Silva</a> on 28/03/17 - 09:04
+ -->
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="main">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locadora de Filmes</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+</head>
+<style>
+    body {
+        text-align: center;
+        background: linear-gradient(to right, #6F686D, #B3B492, #CBB8A9, #D8D0C1, #E0D3DE);
+    }
+
+    .button {
+        padding: 6px;
+        background: none;
+        border: none;
+        box-shadow: 0 0 10px -2px #000;
+        cursor: pointer;
+        color: white;
+    }
+
+    .button:hover {
+        box-shadow: 0 2px 15px -2px #000;
+    }
+
+    .btn-primary {
+        background: #6F686D;
+    }
+
+    .btn-second {
+        background: #B3B492;
+    }
+
+    .btn-thirty {
+        background: #CBB8A9;
+    }
+
+    .form {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px;
+        border: solid 1px white;
+        text-align: center;
+        background: linear-gradient(to top right, #D8D0C1, #B3B492);
+        box-shadow: 0 0 10px -2px #6F686D;
+    }
+
+    .input {
+        width: 90%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: none;
+        background: #E0D3DE;
+    }
+
+    .result {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+    }
+
+    .notification {
+        min-width: 100px;
+        text-align: center;
+        color: white;
+        border: none;
+        background: dimgray;
+        padding: 10px;
+    }
+
+    .filmes {
+        text-align: left;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .title {
+        background: linear-gradient(to right, #B3B492, #CBB8A9);
+        padding: 4px;
+    }
+
+    .info {
+        background: linear-gradient(to left, #6F686D, #D8D0C1);
+        padding: 10px;
+    }
+
+    .info p {
+        margin: 5px;
+    }
+</style>
+<body ng-controller="FilmeController">
+<div>
+    <h1>Filmes</h1>
+    <button class="button btn-primary" ng-click="setCadastro(true)" ng-show="!getCadastro()">Cadastrar filme
+    </button>
+    <br><br>
+    <div class="filmes" ng-repeat="f in filmes">
+        <div class="title">
+            {{"id: " + f.id + " - Título: " + f.titulo}}
+        </div>
+        <div class="info">
+            <p>{{"Gênero: " + f.genero}}</p>
+            <p>{{"Duração: " + f.duracao}}</p>
+            <p>{{"Estado: " + f.estado}}</p>
+            <button class="button btn-second" ng-click="setFilme(f)">Editar</button>
+            <button class="button btn-primary" ng-click="alugaFilme(f)" ng-show="disponivel(f.estado)">Alugar</button>
+            <button class="button btn-primary" ng-click="devolveFilme(f)" ng-show="!disponivel(f.estado)">Devolver
+            </button>
+        </div>
+        <br>
+    </div>
+    <div class="form" ng-show="getCadastro()">
+        <h3>Novo Filme</h3>
+        <form>
+            <input class="input" type="text" placeholder="Título" ng-model="filme.titulo">
+            <br>
+            <input class="input" type="text" placeholder="Gênero" ng-model="filme.genero">
+            <br>
+            <input class="input" type="number" placeholder="Duração" ng-model="filme.duracao">
+            <br><br>
+            <input class="button btn-primary" type="submit" value="Cadastrar" ng-click="saveFilme()">
+            <input class="button btn-second" type="reset" value="Cancelar" ng-click="setCadastro(false)">
+        </form>
+    </div>
+    <div class="result">
+        <div class="notification">
+            <h2>{{notificationText}}</h2>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../static/js/main.js"></script>
+<script type="text/javascript" src="../static/js/controller/filmeController.js"></script>
+</body>
+</html>
