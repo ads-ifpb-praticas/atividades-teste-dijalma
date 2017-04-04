@@ -28,8 +28,8 @@ public class FilmeService {
     }
 
     public Filme update(Long id, Filme filme) throws FilmeException {
-        validation.validaEdicaoDoFilme(filme);
         Filme finded = dao.findOne(id);
+        validation.validaEdicaoDoFilme(finded);
         finded = filme;
         return dao.save(finded);
     }
