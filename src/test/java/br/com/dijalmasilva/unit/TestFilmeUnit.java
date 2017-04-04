@@ -49,28 +49,30 @@ public class TestFilmeUnit {
     }
 
     @Test
-    public void acharFilmePorID() {
-        Filme filme = service.findById(1L);
-        assertNotNull(filme);
+    public void acharFilmePorID() throws FilmeException {
+        Filme save = service.save(new Filme("Troia", "Ação", 100, EstadoEnum.DISPONIVEL));
+        Filme filme = service.findById(save.getId());
+        assertEquals(filme.getTitulo(), save.getTitulo());
     }
 
     @Test
     public void TestAtualizarFilme() throws FilmeException {
-        Filme filme = service.findById(1L);
-        filme.setEstado(EstadoEnum.EMPRESTADO);
-        Filme update = service.update(1L, filme);
-
-        assertNotNull(update);
+        Filme save = service.save(new Filme("Cinquentas tons de cinza", "Não é ação", 10, EstadoEnum.DISPONIVEL));
+        save.setGenero("Nem comédia.");
+        Filme update = service.update(save.getId(), save);
+        assertEquals(save.getGenero(), update.getGenero());
     }
 
     @Test
     public void TesteAtualizarFilmeEmprestado() {
         try {
-            Filme filme = service.findById(1L);
-            filme.setDuracao(200);
-            service.update(1L, filme);
+            Filme save = service.save(new Filme("Cinquentas tons mais escuro", "Não é ação", 10, EstadoEnum.DISPONIVEL));
+            save.setEstado(EstadoEnum.EMPRESTADO);
+            Filme update = service.update(save.getId(), save);
+            update.setGenero("Nem ficção.");
+            service.update(update.getId(), update);
         } catch (FilmeException e) {
-            e.printStackTrace();
+            assertEquals("Filme não pode ser editado, pois o mesmo está emprestado!", e.getMessage());
         }
     }
 
