@@ -12,9 +12,7 @@ app.controller('FilmeController', ['$scope', '$http', function ($scope, $http) {
     $scope.findAllFilmes = function () {
         $http.get('/filmes').then(function (response) {
             if (response.status === 200) {
-                $scope.notificationText = "Listando todos os filmes";
                 $scope.filmes = response.data;
-                console.log($scope.filmes);
             } else {
                 $scope.notificationText = "Não foram encontrados os filmes.";
                 $scope.filmes = [];

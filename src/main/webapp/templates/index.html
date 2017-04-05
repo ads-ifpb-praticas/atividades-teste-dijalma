@@ -97,10 +97,10 @@
 <body ng-controller="FilmeController">
 <div>
     <h1>Filmes</h1>
-    <button class="button btn-primary" ng-click="setCadastro(true)" ng-show="!getCadastro()">Cadastrar filme
+    <button id="bt-cadastro" class="button btn-primary" ng-click="setCadastro(true)" ng-show="!getCadastro()">Cadastrar filme
     </button>
     <br><br>
-    <div class="filmes" ng-repeat="f in filmes">
+    <div class="filmes" ng-repeat="f in filmes" ng-show="!getCadastro()">
         <div class="title">
             {{"id: " + f.id + " - Título: " + f.titulo}}
         </div>
@@ -118,19 +118,19 @@
     <div class="form" ng-show="getCadastro()">
         <h3>Novo Filme</h3>
         <form>
-            <input class="input" type="text" placeholder="Título" ng-model="filme.titulo">
+            <input id="fTitulo" class="input" type="text" placeholder="Título" ng-model="filme.titulo">
             <br>
-            <input class="input" type="text" placeholder="Gênero" ng-model="filme.genero">
+            <input id="fGenero" class="input" type="text" placeholder="Gênero" ng-model="filme.genero">
             <br>
-            <input class="input" type="number" placeholder="Duração" ng-model="filme.duracao">
+            <input id="fDuracao" class="input" type="number" placeholder="Duração" ng-model="filme.duracao">
             <br><br>
-            <input class="button btn-primary" type="submit" value="Cadastrar" ng-click="saveFilme()">
+            <input id="bt-saveFilme" class="button btn-primary" type="submit" value="Cadastrar" ng-click="saveFilme()">
             <input class="button btn-second" type="reset" value="Cancelar" ng-click="setCadastro(false)">
         </form>
     </div>
     <div class="result">
         <div class="notification">
-            <h2>{{notificationText}}</h2>
+            <h2 id="result">{{notificationText}}</h2>
         </div>
     </div>
 </div>
